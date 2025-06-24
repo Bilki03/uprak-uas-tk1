@@ -1,0 +1,26 @@
+// Pin LED di Arduino Mega
+int ledPins[] = {22, 23, 24, 25, 26, 27, 28, 29};
+int numLeds = 8;
+
+void setup() {
+  // Set semua pin LED sebagai output
+  for (int i = 0; i < numLeds; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  // Running LED ke kanan
+  for (int i = 0; i < numLeds; i++) {
+    digitalWrite(ledPins[i], HIGH);
+    delay(100); // Delay 100ms
+    digitalWrite(ledPins[i], LOW);
+  }
+
+  // Running LED ke kiri
+  for (int i = numLeds - 1; i >= 0; i--) {
+    digitalWrite(ledPins[i], HIGH);
+    delay(100);
+    digitalWrite(ledPins[i], LOW);
+  }
+}
