@@ -1,0 +1,15 @@
+const int potPin = A0;     // pin analog potensiometer
+const int ledPin = 9;      // pin PWM untuk LED
+int potValue = 0;          // nilai baca dari potensiometer
+int ledBrightness = 0;     // nilai PWM untuk LED
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+  potValue = analogRead(potPin);          // Baca nilai 0–1023
+  ledBrightness = map(potValue, 0, 1023, 0, 255);  // Ubah ke 0–255
+  analogWrite(ledPin, ledBrightness);     // Atur kecerahan LED
+  delay(10); // delay kecil agar tidak terlalu cepat
+}
