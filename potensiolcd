@@ -1,0 +1,23 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2); // Alamat I2C bisa saja 0x3F di beberapa modul
+const int potPin = A0; // Pin potensiometer
+
+void setup() {
+  lcd.init();           // Inisialisasi LCD
+  lcd.backlight();      // Nyalakan backlight LCD
+  lcd.setCursor(0, 0);  
+  lcd.print("Potensio Value:");
+}
+
+void loop() {
+  int potValue = analogRead(potPin); // Baca nilai potensio (0–1023)
+
+  lcd.setCursor(0, 1);    // Baris ke-2
+  lcd.print("Nilai: ");
+  lcd.print(potValue);    
+  lcd.print("     ");     // Tambahan spasi agar sisa angka sebelumnya terhapus
+
+  delay(300); // Delay agar pembacaan tidak terlalu cepat
+}
