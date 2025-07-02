@@ -1,0 +1,30 @@
+#include <LedControl.h>
+
+// Inisialisasi LedControl: (DIN, CLK, LOAD, jumlah device)
+LedControl lc = LedControl(12, 11, 10, 1);
+
+int counter = 0;           // Nilai awal counter
+unsigned long delayTime = 500; // Delay antar angka
+
+void setup() {
+  lc.shutdown(0, false);   // Aktifkan display
+  lc.setIntensity(0, 8);   // Atur kecerahan (0-15)
+  lc.clearDisplay(0);      // Hapus tampilan
+}
+
+void loop() {
+  // Ambil angka ratusan, puluhan, dan satuan
+  int ratusan = counter / 100;
+  int puluhan = (counter / 10) % 10;
+  int satuan  = counter % 10;
+
+  // Tampilkan ke 7-segment (digit 0 = kanan)
+  lc.setDigit(0, 2, ratusan, false);
+  lc.setDigit(0, 1, puluhan, false);
+  lc.setDigit(0, 0, satuan, false);
+
+  delay(delayTime); // Tunggu sebentar
+
+  counter++;        // Naikkan counter
+  if (counter > 999) counter = 0; // Kembali ke 0 setelah 999
+}
