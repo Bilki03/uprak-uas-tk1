@@ -1,0 +1,32 @@
+const int potPin = A0; // pin analog potensiometer
+int delayTime = 0;
+
+// Daftar pin LED yang digunakan
+const int ledPins[] = {2, 3, 4,};
+const int numLeds = sizeof(ledPins) / sizeof(ledPins[0]);
+
+void setup() {
+  // Set semua pin LED sebagai output
+  for (int i = 0; i < numLeds; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  // Baca nilai potensiometer (0–1023)
+  int potValue = analogRead(potPin);
+  // Konversi ke delay antara 100 ms – 1000 ms
+  delayTime = map(potValue, 0, 1023, 100, 1000);
+
+  // Nyalakan LED satu per satu
+  for (int i = 0; i < numLeds; i++) {
+    // Matikan semua LED
+    for (int j = 0; j < numLeds; j++) {
+      digitalWrite(ledPins[j], LOW);
+    }
+
+    // Nyalakan LED ke-i
+    digitalWrite(ledPins[i], HIGH);
+    delay(delayTime);
+  }
+}
