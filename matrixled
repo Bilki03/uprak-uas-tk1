@@ -1,0 +1,46 @@
+#include <LedControl.h>
+
+// Inisialisasi LedControl (DIN, CLK, CS, jumlah modul = 1)
+LedControl lc = LedControl(12, 11, 10, 1); // Hanya 1 modul
+
+// Karakter '1' dalam bentuk array byte
+byte karakterS[] = {0x00,0x00,0x22,0x55,0x22,0x00,0x22,0x1c};
+
+// Karakter '2' dalam bentuk array byte
+byte karakterA[] = {0x00,0x00,0x00,0x22,0x55,0x00,0x1c,0x22};
+
+byte karakterZ[] = {0x00,0x22,0x55,0x22,0x08,0x14,0x14,0x08};
+
+void setup() {
+  lc.shutdown(0, false);   // Bangunkan dari mode hemat daya
+  lc.setIntensity(0, 5);   // Atur kecerahan (0–15)
+  lc.clearDisplay(0);      // Bersihkan layar
+}
+
+void loop() {
+  // Tampilkan huruf 'S'
+  for (int i = 0; i < 8; i++) {
+    lc.setRow(0, i, karakterS[i]);
+  }
+  delay(500); // Tunggu 2 detik
+
+  lc.clearDisplay(0); // Bersihkan
+  delay(500);
+
+  // Tampilkan huruf 'A'
+  for (int i = 0; i < 8; i++) {
+    lc.setRow(0, i, karakterA[i]);
+  }
+  delay(500); // Tunggu 2 detik
+
+  lc.clearDisplay(0); // Bersihkan
+  delay(500);
+
+  for (int i = 0; i < 8; i++) {
+    lc.setRow(0, i, karakterZ[i]);
+  }
+  delay(500); // Tunggu 2 detik
+
+  lc.clearDisplay(0); // Bersihkan
+  delay(500);
+}
